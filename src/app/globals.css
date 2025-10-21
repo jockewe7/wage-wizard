@@ -1,26 +1,100 @@
 @import "tailwindcss";
 
+/* Custom properties for design system */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: 210 25% 98%;
+  --foreground: 210 15% 20%;
+  --card: 0 0% 100%;
+  --card-foreground: 210 15% 20%;
+  --popover: 0 0% 100%;
+  --popover-foreground: 210 15% 20%;
+  --primary: 206 100% 29%;
+  --primary-foreground: 0 0% 100%;
+  --secondary: 210 20% 95%;
+  --secondary-foreground: 210 15% 20%;
+  --muted: 210 20% 95%;
+  --muted-foreground: 210 10% 50%;
+  --accent: 45 100% 51%;
+  --accent-foreground: 210 15% 20%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 210 20% 90%;
+  --input: 210 20% 90%;
+  --ring: 206 100% 29%;
+  --radius: 0.75rem;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+.dark {
+  --background: 210 15% 7%;
+  --foreground: 210 20% 98%;
+  --card: 210 15% 9%;
+  --card-foreground: 210 20% 98%;
+  --popover: 210 15% 9%;
+  --popover-foreground: 210 20% 98%;
+  --primary: 206 100% 50%;
+  --primary-foreground: 210 15% 7%;
+  --secondary: 210 15% 15%;
+  --secondary-foreground: 210 20% 98%;
+  --muted: 210 15% 15%;
+  --muted-foreground: 210 10% 60%;
+  --accent: 45 100% 51%;
+  --accent-foreground: 210 15% 7%;
+  --destructive: 0 84.2% 60.2%;
+  --destructive-foreground: 0 0% 100%;
+  --border: 210 15% 15%;
+  --input: 210 15% 15%;
+  --ring: 206 100% 50%;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+/* Utility classes for semantic colors */
+@layer utilities {
+  .bg-background { background-color: hsl(var(--background)); }
+  .bg-foreground { background-color: hsl(var(--foreground)); }
+  .bg-card { background-color: hsl(var(--card)); }
+  .bg-card-foreground { background-color: hsl(var(--card-foreground)); }
+  .bg-popover { background-color: hsl(var(--popover)); }
+  .bg-popover-foreground { background-color: hsl(var(--popover-foreground)); }
+  .bg-primary { background-color: hsl(var(--primary)); }
+  .bg-primary-foreground { background-color: hsl(var(--primary-foreground)); }
+  .bg-secondary { background-color: hsl(var(--secondary)); }
+  .bg-secondary-foreground { background-color: hsl(var(--secondary-foreground)); }
+  .bg-muted { background-color: hsl(var(--muted)); }
+  .bg-muted-foreground { background-color: hsl(var(--muted-foreground)); }
+  .bg-accent { background-color: hsl(var(--accent)); }
+  .bg-accent-foreground { background-color: hsl(var(--accent-foreground)); }
+  .bg-destructive { background-color: hsl(var(--destructive)); }
+  .bg-destructive-foreground { background-color: hsl(var(--destructive-foreground)); }
+  
+  .text-background { color: hsl(var(--background)); }
+  .text-foreground { color: hsl(var(--foreground)); }
+  .text-card { color: hsl(var(--card)); }
+  .text-card-foreground { color: hsl(var(--card-foreground)); }
+  .text-popover { color: hsl(var(--popover)); }
+  .text-popover-foreground { color: hsl(var(--popover-foreground)); }
+  .text-primary { color: hsl(var(--primary)); }
+  .text-primary-foreground { color: hsl(var(--primary-foreground)); }
+  .text-secondary { color: hsl(var(--secondary)); }
+  .text-secondary-foreground { color: hsl(var(--secondary-foreground)); }
+  .text-muted { color: hsl(var(--muted)); }
+  .text-muted-foreground { color: hsl(var(--muted-foreground)); }
+  .text-accent { color: hsl(var(--accent)); }
+  .text-accent-foreground { color: hsl(var(--accent-foreground)); }
+  .text-destructive { color: hsl(var(--destructive)); }
+  .text-destructive-foreground { color: hsl(var(--destructive-foreground)); }
+  
+  .border-border { border-color: hsl(var(--border)); }
+  .border-input { border-color: hsl(var(--input)); }
+  .border-ring { border-color: hsl(var(--ring)); }
+}
+
+@layer base {
+  * {
+    border-color: hsl(var(--border));
   }
-}
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  body {
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    font-family: system-ui, sans-serif;
+  }
 }
