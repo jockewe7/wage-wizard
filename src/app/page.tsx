@@ -1,6 +1,5 @@
-import { Calculator } from "@/components/Calculator";
-import Image from "next/image";
 
+import { SimpleCalculator } from "./(calculator)/components/SimpleCalculator";
 
 export default function Home() {
   return (
@@ -14,8 +13,7 @@ export default function Home() {
             Beräkna din lön, skatter, arbetsgivaravgifter och utdelning som frilansare i Sverige
           </p>
         </header>
-        
-        <Calculator />
+        <SimpleCalculator />
         
         <footer className="mt-16 text-center text-sm text-muted-foreground">
           <p>Detta är en förenklad kalkylator. Konsultera alltid en skatterådgivare för exakta beräkningar.</p>

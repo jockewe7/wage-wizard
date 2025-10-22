@@ -1,23 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-
-interface CalculationResults {
-  grossIncome: number;
-  employerContributions: number;
-  totalCost: number;
-  netSalary: number;
-  incomeTax: number;
-  annualPension: number;
-  annualPensionTax: number;
-  profitAfterSalary: number;
-  corporateTax: number;
-  profitAfterTaxes: number;
-  dividendAmount: number;
-  dividendTax: number;
-  netDividend: number;
-  remainingCapital: number;
-}
+import type { CalculationResults } from "../types/calculation";
 
 interface CalculatorResultsProps {
   results: CalculationResults;

@@ -5,23 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { HelpCircle } from "lucide-react";
-
-interface CalculationResults {
-  grossIncome: number;
-  employerContributions: number;
-  totalCost: number;
-  netSalary: number;
-  incomeTax: number;
-  profitAfterSalary: number;
-  corporateTax: number;
-  profitAfterTaxes: number;
-  annualPension: number;
-  annualPensionTax: number;
-  dividendAmount: number;
-  dividendTax: number;
-  netDividend: number;
-  remainingCapital: number;
-}
+import type { CalculationResults } from "../types/calculation";
 
 interface CalculatorSettingsProps {
   onResultsChange: (results: CalculationResults) => void;
@@ -30,7 +14,7 @@ interface CalculatorSettingsProps {
 const ibb = 76_200.0; // Inkomstbasbelopp for 2024
 const stateTaxThreshold = 615000.0; // Approx threshold for state tax in 2024
 
-export const CalculatorSettings = ({
+export const AdvancedCalculatorInputs = ({
   onResultsChange,
 }: CalculatorSettingsProps) => {
   const [hourlyRate, setHourlyRate] = useState<string>("850");

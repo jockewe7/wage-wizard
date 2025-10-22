@@ -1,27 +1,11 @@
 "use client";
 import { useState } from "react";
-import { CalculatorSettings } from "./CalculatorSettings";
+import { AdvancedCalculatorInputs } from "./AdvancedCalculatorInputs";
 import { CalculatorResults } from "./CalculatorResults";
 import { CashAccumulationChart } from "./CashAccumulationChart";
+import type { CalculationResults } from "../types/calculation";
 
-interface CalculationResults {
-  grossIncome: number;
-  employerContributions: number;
-  totalCost: number;
-  netSalary: number;
-  incomeTax: number;
-  profitAfterSalary: number;
-  corporateTax: number;
-  profitAfterTaxes: number;
-  annualPension: number;
-  annualPensionTax: number;
-  dividendAmount: number;
-  dividendTax: number;
-  netDividend: number;
-  remainingCapital: number;
-}
-
-export const Calculator = () => {
+export const AdvancedCalculator = () => {
   const [results, setResults] = useState<CalculationResults>({
     grossIncome: 0,
     employerContributions: 0,
@@ -47,7 +31,7 @@ export const Calculator = () => {
 
   return (
     <div className='w-full max-w-6xl mx-auto space-y-4'>
-      <CalculatorSettings onResultsChange={handleResultsChange} />
+      <AdvancedCalculatorInputs onResultsChange={handleResultsChange} />
       <CalculatorResults results={results} />
       <CashAccumulationChart remainingCapital={results.remainingCapital} />
     </div>
