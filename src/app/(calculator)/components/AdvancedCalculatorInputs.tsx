@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
+import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { HelpCircle } from "lucide-react";
@@ -60,12 +60,10 @@ export const AdvancedCalculatorInputs = ({
           <Label htmlFor='hourlyRate' className='text-foreground'>
             Timpris (SEK)
           </Label>
-          <Input
+          <NumberInput
             id='hourlyRate'
-            type='number'
             value={hourlyRate}
             onChange={(e) => setHourlyRate(e.target.value)}
-            className='text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             placeholder='Ange timpris'
           />
         </div>
@@ -99,12 +97,10 @@ export const AdvancedCalculatorInputs = ({
               </Tooltip>
             </TooltipProvider>
           </div>
-          <Input
+          <NumberInput
             id='billableHours'
-            type='number'
             value={billableHours}
             onChange={(e) => setBillableHours(e.target.value)}
-            className='text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             placeholder='Ange debiterbara timmar'
           />
         </div>
@@ -113,12 +109,10 @@ export const AdvancedCalculatorInputs = ({
           <Label htmlFor='desiredSalary' className='text-foreground'>
             Önskad månadslön (SEK)
           </Label>
-          <Input
+          <NumberInput
             id='desiredSalary'
-            type='number'
             value={desiredSalary}
             onChange={(e) => setDesiredSalary(e.target.value)}
-            className='text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             placeholder='Ange månadslön'
           />
         </div>
@@ -127,12 +121,10 @@ export const AdvancedCalculatorInputs = ({
           <Label htmlFor='vacationDays' className='text-foreground'>
             Semesterdagar
           </Label>
-          <Input
+          <NumberInput
             id='vacationDays'
-            type='number'
             value={vacationDays}
             onChange={(e) => setVacationDays(e.target.value)}
-            className='text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             placeholder='Ange semesterdagar'
           />
         </div>
@@ -141,12 +133,10 @@ export const AdvancedCalculatorInputs = ({
           <Label htmlFor='desiredPension' className='text-foreground'>
             Önskad tjänstepension (SEK/månad)
           </Label>
-          <Input
+          <NumberInput
             id='desiredPension'
-            type='number'
             value={desiredPension}
             onChange={(e) => setDesiredPension(e.target.value)}
-            className='text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             placeholder='Ange tjänstepension'
           />
         </div>
@@ -155,12 +145,10 @@ export const AdvancedCalculatorInputs = ({
           <Label htmlFor='otherExpenses' className='text-foreground'>
             Övriga utgifter (SEK/år)
           </Label>
-          <Input
+          <NumberInput
             id='otherExpenses'
-            type='number'
             value={otherExpenses}
             onChange={(e) => setOtherExpenses(e.target.value)}
-            className='text-lg [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none'
             placeholder='Ange årliga utgifter'
           />
         </div>
