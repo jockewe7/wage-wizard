@@ -21,7 +21,7 @@ function NavLink({ href, label }: { href: string; label: string }) {
       aria-current={active ? "page" : undefined}
       className={[
         "px-3 py-2 rounded-md text-sm font-medium transition",
-        active ? "bg-gray-900 text-white" : "text-gray-300 hover:bg-gray-700 hover:text-white",
+        active ? "bg-primary text-primary-foreground" : "text-muted-foreground hover:bg-accent hover:text-accent-foreground",
       ].join(" ")}
     >
       {label}
@@ -46,8 +46,8 @@ export default function Topbar() {
     <header
       className={[
         "sticky top-0 z-50",
-        "bg-gray-800/90 backdrop-blur supports-[backdrop-filter]:bg-gray-800/70",
-        "border-b border-gray-700",
+        "bg-card/90 backdrop-blur supports-backdrop-filter:bg-card/70",
+        "border-b border-border",
         scrolled ? "shadow-sm" : "",
         // iOS notch safe-area
         "pt-[env(safe-area-inset-top)]",
@@ -55,20 +55,20 @@ export default function Topbar() {
     >
       <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-14 items-center justify-between">
-          <Link href="/" className="text-white font-semibold">FrilansKalkylator</Link>
+          <Link href="/" className="text-foreground font-semibold">FrilansKalkylator</Link>
 
           <div className="hidden md:flex items-center gap-1">
             {NAV.map((i) => <NavLink key={i.href} {...i} />)}
           </div>
 
           <div className="hidden md:flex items-center gap-2">
-            <Link href="/logga-in" className="px-3 py-2 rounded-md text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-500">
+            <Link href="/logga-in" className="px-3 py-2 rounded-md text-sm font-medium text-primary-foreground bg-primary hover:bg-primary/90">
               Logga in
             </Link>
           </div>
 
           <button
-            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-gray-200 hover:bg-gray-700 focus:outline-none"
+            className="md:hidden inline-flex items-center justify-center rounded-md p-2 text-muted-foreground hover:bg-accent hover:text-accent-foreground focus:outline-none"
             onClick={() => setOpen((v) => !v)}
             aria-label="Öppna meny"
             aria-expanded={open}
@@ -91,7 +91,7 @@ export default function Topbar() {
                   key={i.href}
                   href={i.href}
                   onClick={() => setOpen(false)}
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-100 hover:bg-gray-700"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-foreground hover:bg-accent hover:text-accent-foreground"
                 >
                   {i.label}
                 </Link>
@@ -99,7 +99,7 @@ export default function Topbar() {
               <Link
                 href="/logga-in"
                 onClick={() => setOpen(false)}
-                className="block px-3 py-2 rounded-md text-base font-medium text-white bg-indigo-600 hover:bg-indigo-500"
+                className="block px-3 py-2 rounded-md text-base font-medium text-primary-foreground bg-primary hover:bg-primary/90"
               >
                 Logga in
               </Link>
