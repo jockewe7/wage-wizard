@@ -10,10 +10,26 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { HelpCircle } from "lucide-react";
+import { calculateFreelanceEarnings } from "../utils/calculations";
 
 export const SimpleCalculator = () => {
-  const thello = () => {};
-  const [monthlySalary, setMonthlySalary] = useState<string>("50000");
-  
+  const billableHours = 1910; // Antal debiterbara timmar per år justerat för röda dagar
+  const vacationDays = 25;
+  const pension = 6000;
+  const monthlySalary = 51250;
+  const otherExpensesPerYear = 20000;
+  const [hourlyRate, setHourlyRate] = useState<string>("850");
+
+  const results = calculateFreelanceEarnings({
+    hourlyRate: hourlyRate ? Number(hourlyRate) : 0,
+    billableHours,
+    vacationDays,
+    desiredSalary: monthlySalary,
+    desiredPension: pension,
+    otherExpenses: otherExpensesPerYear,
+  });
+
+  console.log("Results:", results);
+
   return <div> Hello there... </div>;
 };

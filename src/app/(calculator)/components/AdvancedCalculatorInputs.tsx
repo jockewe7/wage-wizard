@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import { HelpCircle } from "lucide-react";
 import type { CalculationResults } from "../types/calculation";
+import { calculateFreelanceEarnings } from "../utils/calculations";
 
 interface CalculatorSettingsProps {
   onResultsChange: (results: CalculationResults) => void;
@@ -38,88 +39,16 @@ export const AdvancedCalculatorInputs = ({
   ]);
 
   const calculateEarnings = () => {
-    // Calculate gross income
-    const hourlyRateNum = Number(hourlyRate) || 0;
-    const vacationDaysNum = Number(vacationDays) || 0;
-    const desiredSalaryNum = Number(desiredSalary) || 0;
-    const billableHoursNum = Number(billableHours) || 0;
-    const desiredPensionNum = Number(desiredPension) || 0;
-    const otherExpensesNum = Number(otherExpenses) || 0;
-
-    const billedHours = billableHoursNum - vacationDaysNum * 8;
-    const grossIncome = hourlyRateNum * billedHours;
-
-    // Calculate salary costs (annual)
-    const annualSalary = desiredSalaryNum * 12;
-
-    // Employer contributions (arbetsgivaravgifter) - approximately 31.42%
-    const employerContributions = annualSalary * 0.3142;
-
-    // Total salary cost to company
-    const totalSalaryCost = annualSalary + employerContributions;
-
-    // Income tax estimation (simplified progressive tax)
-    // This is a simplified calculation
-    // Possible dividend
-    const dividendMax = annualSalary * 0.5;
-
-    let incomeTax = 0;
-    if (annualSalary <= stateTaxThreshold) {
-      incomeTax = annualSalary * 0.32; // Municipal tax average
-    } else {
-      incomeTax =
-        stateTaxThreshold * 0.32 + (annualSalary - stateTaxThreshold) * 0.52;
-    }
-
-    const netSalary = annualSalary - incomeTax;
-    const annualPension = desiredPensionNum * 12;
-    const annualTotalPensionCost = annualPension * 1.2426; // Including fees and taxes
-    const annualPensionTax = annualTotalPensionCost - annualPension;
-    // Calculate available for dividends
-    const profitAfterSalary =
-      grossIncome - totalSalaryCost - annualTotalPensionCost;
-
-    // Corporate tax (20.6%)
-    const corporateTax = 0.206 * profitAfterSalary;
-    const profitAfterTaxes = profitAfterSalary - corporateTax;
-
-    // Dividend calculation (simplified)
-    // Assuming qualified dividend up to certain threshold
-
-    const dividendAmount = Math.max(Math.min(profitAfterTaxes, dividendMax), 0);
-    // Dividend tax (approximately 20% on qualified dividends)
-    const dividendTax = dividendAmount * 0.2;
-    const netDividend = dividendAmount - dividendTax;
-
-    // Remaining capital in company (after other expenses)
-    const remainingCapital =
-      profitAfterTaxes - dividendAmount - otherExpensesNum;
-
-    console.log("grossIncome", grossIncome);
-    console.log("totalSalaryCost", totalSalaryCost);
-    console.log("annualPension", annualTotalPensionCost);
-    console.log("otherExpenses", otherExpensesNum);
-    console.log("profitAfterSalary", profitAfterSalary);
-    console.log("profitAfterTaxes", profitAfterTaxes);
-    console.log("corporateTax", corporateTax);
-
-    const results: CalculationResults = {
-      grossIncome,
-      employerContributions,
-      totalCost: totalSalaryCost,
-      profitAfterSalary,
-      corporateTax,
-      profitAfterTaxes,
-      netSalary,
-      annualPension,
-      annualPensionTax,
-      incomeTax,
-      dividendAmount,
-      dividendTax,
-      netDividend,
-      remainingCapital,
+    const inputs = {
+      hourlyRate: Number(hourlyRate) || 0,
+      vacationDays: Number(vacationDays) || 0,
+      desiredSalary: Number(desiredSalary) || 0,
+      billableHours: Number(billableHours) || 0,
+      desiredPension: Number(desiredPension) || 0,
+      otherExpenses: Number(otherExpenses) || 0,
     };
 
+    const results = calculateFreelanceEarnings(inputs);
     onResultsChange(results);
   };
   return (
