@@ -1,9 +1,11 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
-import { formatCurrency } from "@/lib/utils";
 import type { CalculationResults } from "../types/calculation";
 import { ResultLabel } from "./ResultLabel";
+import { ResultDeduction } from "./ResultDeduction";
+import { ResultTotal } from "./ResultTotal";
+import { SummaryItem } from "./SummaryItem";
 
 interface CalculatorResultsProps {
   results: CalculationResults;
@@ -17,25 +19,9 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
         <h3 className='text-lg font-semibold mb-3 text-foreground'>Lön</h3>
         <div className='space-y-2'>
           <ResultLabel value={results.netSalary} label="Årslön" />
-
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>Arbetsgivaravgifter</span>
-            <span className='font-medium text-destructive'>
-              -{formatCurrency(results.employerContributions)}
-            </span>
-          </div>
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>Inkomstskatt</span>
-            <span className='font-medium text-destructive'>
-              -{formatCurrency(results.incomeTax)}
-            </span>
-          </div>
-          <div className='flex justify-between items-center pt-3 border-t border-border'>
-            <span className='text-muted-foreground'>Nettolön</span>
-            <span className='font-semibold text-lg text-primary'>
-              {formatCurrency(results.netSalary)}
-            </span>
-          </div>
+          <ResultDeduction value={results.employerContributions} label="Arbetsgivaravgifter" />
+          <ResultDeduction value={results.incomeTax} label="Inkomstskatt" />
+          <ResultTotal value={results.netSalary} label="Nettolön" />
         </div>
       </Card>
 
@@ -44,12 +30,7 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
           Tjänstepension
         </h3>
         <ResultLabel value={results.annualPension} label="Tjänstepension" />
-        <div className='flex justify-between items-center'>
-          <span className='text-muted-foreground'>Skatt</span>
-          <span className='font-medium text-destructive'>
-            -{formatCurrency(results.annualPensionTax)}
-          </span>
-        </div>
+        <ResultDeduction value={results.annualPensionTax} label="Skatt" />
       </Card>
 
       <Card className='p-4 shadow-(--shadow-card)'>
@@ -58,18 +39,8 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
         </h3>
         <div className='space-y-2'>
           <ResultLabel value={results.profitAfterSalary} label="Vinst före bolagsskatt" />
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>Bolagsskatt (20,6%)</span>
-            <span className='font-medium text-destructive'>
-              -{formatCurrency(results.corporateTax)}
-            </span>
-          </div>
-          <div className='flex justify-between items-center pt-3 border-t border-border'>
-            <span className='text-muted-foreground'>Vinst efter bolagsskatt</span>
-            <span className='font-semibold text-lg text-primary'>
-              {formatCurrency(results.profitAfterTaxes)}
-            </span>
-          </div>
+          <ResultDeduction value={results.corporateTax} label="Bolagsskatt (20,6%)" />
+          <ResultTotal value={results.profitAfterTaxes} label="Vinst efter bolagsskatt" />
         </div>
       </Card>
 
@@ -79,18 +50,8 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
         </h3>
         <div className='space-y-2'>
           <ResultLabel value={results.dividendAmount} label="Utdelning före skatt" />
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>Utdelningsskatt</span>
-            <span className='font-medium text-destructive'>
-              -{formatCurrency(results.dividendTax)}
-            </span>
-          </div>
-          <div className='flex justify-between items-center pt-3 border-t border-border'>
-            <span className='text-muted-foreground'>Nettoutdelning</span>
-            <span className='font-semibold text-lg text-primary'>
-              {formatCurrency(results.netDividend)}
-            </span>
-          </div>
+          <ResultDeduction value={results.dividendTax} label="Utdelningsskatt" />
+          <ResultTotal value={results.netDividend} label="Nettoutdelning" />
         </div>
       </Card>
 
@@ -99,36 +60,28 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
           Sammanfattning
         </h3>
         <div className='grid md:grid-cols-2 lg:grid-cols-5 gap-x-6 gap-y-2'>
-          <div className='flex flex-col'>
-            <span className='text-sm text-muted-foreground'>Bruttoinkomst</span>
-            <span className='font-semibold text-foreground'>
-              {formatCurrency(results.grossIncome)}
-            </span>
-          </div>
-          <div className='flex flex-col'>
-            <span className='text-sm text-muted-foreground'>Total nettoinkomst</span>
-            <span className='font-semibold text-primary'>
-              {formatCurrency(results.netSalary + results.netDividend)}
-            </span>
-          </div>
-          <div className='flex flex-col'>
-            <span className='text-sm text-muted-foreground'>Tjänstepension</span>
-            <span className='font-semibold text-primary'>
-              {formatCurrency(results.annualPension)}
-            </span>
-          </div>
-          <div className='flex flex-col'>
-            <span className='text-sm text-muted-foreground'>Skatter & avgifter</span>
-            <span className='font-semibold text-destructive'>
-              -{formatCurrency(results.annualPensionTax + results.incomeTax + results.employerContributions + results.dividendTax + results.corporateTax)}
-            </span>
-          </div>
-          <div className='flex flex-col'>
-            <span className='text-sm text-muted-foreground'>Kvar i bolaget</span>
-            <span className='font-semibold text-accent-foreground'>
-              {formatCurrency(results.remainingCapital)}
-            </span>
-          </div>
+          <SummaryItem value={results.grossIncome} label="Bruttoinkomst" />
+          <SummaryItem 
+            value={results.netSalary + results.netDividend} 
+            label="Total nettoinkomst" 
+            variant="primary" 
+          />
+          <SummaryItem 
+            value={results.annualPension} 
+            label="Tjänstepension" 
+            variant="primary" 
+          />
+          <SummaryItem 
+            value={results.annualPensionTax + results.incomeTax + results.employerContributions + results.dividendTax + results.corporateTax} 
+            label="Skatter & avgifter" 
+            variant="destructive"
+            isNegative 
+          />
+          <SummaryItem 
+            value={results.remainingCapital} 
+            label="Kvar i bolaget" 
+            variant="accent" 
+          />
         </div>
       </Card>
     </div>
