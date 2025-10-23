@@ -3,6 +3,7 @@
 import { Card } from "@/components/ui/card";
 import { formatCurrency } from "@/lib/utils";
 import type { CalculationResults } from "../types/calculation";
+import { ResultLabel } from "./ResultLabel";
 
 interface CalculatorResultsProps {
   results: CalculationResults;
@@ -15,12 +16,7 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
       <Card className='p-4 shadow-(--shadow-card)'>
         <h3 className='text-lg font-semibold mb-3 text-foreground'>Lön</h3>
         <div className='space-y-2'>
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>Årslön</span>
-            <span className='font-medium text-foreground'>
-              {formatCurrency(results.netSalary)}
-            </span>
-          </div>
+          <ResultLabel value={results.netSalary} label="Årslön" />
 
           <div className='flex justify-between items-center'>
             <span className='text-muted-foreground'>Arbetsgivaravgifter</span>
