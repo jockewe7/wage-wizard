@@ -43,12 +43,7 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
         <h3 className='text-lg font-semibold mb-3 text-foreground'>
           Tjänstepension
         </h3>
-        <div className='flex justify-between items-center'>
-          <span className='text-muted-foreground'>Tjänstepension</span>
-          <span className='font-medium text-foreground'>
-            {formatCurrency(results.annualPension)}
-          </span>
-        </div>
+        <ResultLabel value={results.annualPension} label="Tjänstepension" />
         <div className='flex justify-between items-center'>
           <span className='text-muted-foreground'>Skatt</span>
           <span className='font-medium text-destructive'>
@@ -62,14 +57,7 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
           Vinst och bolagsskatt
         </h3>
         <div className='space-y-2'>
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>
-              Vinst före bolagsskatt
-            </span>
-            <span className='font-medium text-foreground'>
-              {formatCurrency(results.profitAfterSalary)}
-            </span>
-          </div>
+          <ResultLabel value={results.profitAfterSalary} label="Vinst före bolagsskatt" />
           <div className='flex justify-between items-center'>
             <span className='text-muted-foreground'>Bolagsskatt (20,6%)</span>
             <span className='font-medium text-destructive'>
@@ -90,14 +78,7 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
           Utdelning
         </h3>
         <div className='space-y-2'>
-          <div className='flex justify-between items-center'>
-            <span className='text-muted-foreground'>
-              Utdelning före skatt
-            </span>
-            <span className='font-medium text-foreground'>
-              {formatCurrency(results.dividendAmount)}
-            </span>
-          </div>
+          <ResultLabel value={results.dividendAmount} label="Utdelning före skatt" />
           <div className='flex justify-between items-center'>
             <span className='text-muted-foreground'>Utdelningsskatt</span>
             <span className='font-medium text-destructive'>
