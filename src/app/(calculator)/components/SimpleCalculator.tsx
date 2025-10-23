@@ -9,7 +9,7 @@ import {
   TooltipProvider,
   TooltipTrigger,
 } from "@/components/ui/tooltip";
-import { HelpCircle } from "lucide-react";
+import { HelpCircle, ArrowRight, Sparkles } from "lucide-react";
 import { calculateFreelanceEarnings } from "../utils/calculations";
 import { NumberInput } from "@/components/ui/number-input";
 import { CalculationResults } from "../types/calculation";
@@ -70,51 +70,88 @@ export const SimpleCalculator = () => {
   console.log("Results:", results);
 
   return (
-    <div className='w-2/4 max-w-6xl mx-auto flex gap-4'>
-      <Card className='p-4 md:p-6 shadow-(--shadow-card) flex-1'>
-        <div className='flex flex-col items-center space-y-6'>
-          <h2 className='text-xl font-bold text-foreground mb-4'>
-            FRILANSKALKYLATOR
-          </h2>
+    <div className='max-w-4xl mx-auto'>
+      <Card className='p-8 md:p-10 shadow-(--shadow-card) border-0 bg-card/50 backdrop-blur-sm'>
+        <div className='flex flex-col items-center space-y-8'>
+          <div className="text-center">
+            <div className="flex justify-center mb-4">
+              <div className="p-3 bg-primary/10 rounded-full">
+                <Sparkles className="h-8 w-8 text-primary" />
+              </div>
+            </div>
+            <h2 className='text-2xl md:text-3xl font-bold text-foreground mb-2'>
+              Frilans Kalkylator
+            </h2>
+            <p className="text-muted-foreground">
+              Ange ditt timpris och se din potentiella inkomst direkt
+            </p>
+          </div>
 
-          <div className='flex items-center gap-3 w-full max-w-md justify-center'>
+          <div className='flex items-center gap-4 w-full max-w-sm justify-center bg-muted/30 p-6 rounded-xl border border-border/50'>
             <Label
               htmlFor='hourlyRate'
-              className='text-foreground whitespace-nowrap'
+              className='text-foreground whitespace-nowrap font-medium'
             >
               Timpris (SEK)
             </Label>
+            <ArrowRight className="h-4 w-4 text-muted-foreground" />
             <NumberInput
               id='hourlyRate'
               value={hourlyRate}
               onChange={(e) => setHourlyRate(e.target.value)}
-              placeholder='Ange timpris'
-              className='w-32'
+              placeholder='850'
+              className='w-24 text-center font-semibold'
             />
           </div>
 
           <div className='w-full'>
-            <h3 className='text-lg font-semibold mb-3 text-foreground text-center'>
-              RESULTAT
-            </h3>
             {results.grossIncome === 0 ? (
-              <p className='text-center text-muted-foreground'>
-                Ange ditt timpris för att se resultatet.
-              </p>
+              <div className="text-center py-12">
+                <div className="p-4 bg-muted/20 rounded-full inline-flex mb-4">
+                  <HelpCircle className="h-8 w-8 text-muted-foreground" />
+                </div>
+                <p className='text-muted-foreground text-lg'>
+                  Ange ditt timpris för att se resultatet
+                </p>
+                <p className='text-sm text-muted-foreground mt-2'>
+                  Baserat på 1910 fakturerbara timmar per år
+                </p>
+              </div>
             ) : (
-              <div className='grid md:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-2'>
-                <SummaryItem
-                  value={(results.netSalary + results.netDividend) / 12}
-                  label='Nettomånadslön'
-                />
-                <SummaryItem
-                  value={(results.netSalary + results.netDividend) / 12}
-                  label='Motsvarar månadslön som anställd'
-                />
-                <SummaryItem
-                  value={results.remainingCapital}
-                  label='Kvar i bolaget per år'
-                />
+              <div className="space-y-6">
+                <h3 className='text-xl font-semibold text-foreground text-center mb-6'>
+                  📊 Dina Resultat
+                </h3>
+                <div className='grid md:grid-cols-3 gap-6'>
+                  <div className="bg-primary/5 border border-primary/20 rounded-xl p-6 text-center">
+                    <SummaryItem
+                      value={(results.netSalary + results.netDividend) / 12}
+                      label='💰 Nettomånadsinkomst'
+                      variant="primary"
+                    />
+                  </div>
+                  <div className="bg-muted/30 border border-border/50 rounded-xl p-6 text-center">
+                    <SummaryItem
+                      value={results.remainingCapital}
+                      label='🏦 Kvar i bolaget/år'
+                      variant="accent"
+                    />
+                  </div>
+                  <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-6 text-center">
+                    <SummaryItem
+                      value={results.annualPensionTax + results.incomeTax + results.employerContributions + results.dividendTax + results.corporateTax}
+                      label='💸 Totala skatter/år'
+                      variant="destructive"
+                    />
+                  </div>
+                </div>
+                
+                <div className="mt-8 p-6 bg-accent/5 border border-accent/20 rounded-xl">
+                  <p className="text-sm text-center text-muted-foreground">
+                    <strong>Beräkningsgrund:</strong> Månadslön 51 250 SEK • Tjänstepension 6 000 SEK • 
+                    Semesterdagar 25 • Andra kostnader 20 000 SEK/år
+                  </p>
+                </div>
               </div>
             )}
           </div>
