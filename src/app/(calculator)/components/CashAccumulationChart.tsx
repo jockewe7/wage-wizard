@@ -6,6 +6,7 @@ import { Label } from "@/components/ui/label";
 import { Checkbox } from "@/components/ui/checkbox";
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, Area, AreaChart } from 'recharts';
 import { TrendingUp, DollarSign, BarChart3 } from 'lucide-react';
+import { formatCurrency } from "@/lib/utils";
 
 interface CashAccumulationChartProps {
   remainingCapital: number;
@@ -14,15 +15,6 @@ interface CashAccumulationChartProps {
 export const CashAccumulationChart = ({ remainingCapital }: CashAccumulationChartProps) => {
   const [investEnabled, setInvestEnabled] = useState(false);
   const [yearlyReturn, setYearlyReturn] = useState("7");
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("sv-SE", {
-      style: "currency",
-      currency: "SEK",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
 
   const generateCashAccumulationData = () => {
     const data = [];

@@ -1,6 +1,7 @@
 "use client";
 
 import { Card } from "@/components/ui/card";
+import { formatCurrency } from "@/lib/utils";
 import type { CalculationResults } from "../types/calculation";
 
 interface CalculatorResultsProps {
@@ -8,14 +9,6 @@ interface CalculatorResultsProps {
 }
 
 export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("sv-SE", {
-      style: "currency",
-      currency: "SEK",
-      minimumFractionDigits: 0,
-      maximumFractionDigits: 0,
-    }).format(amount);
-  };
 
   return (
     <div className='grid md:grid-cols-2 lg:grid-cols-4 gap-4'>    
