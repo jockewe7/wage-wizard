@@ -104,6 +104,21 @@ export default function Home() {
         </div>
         
         <SimpleCalculator />
+
+        {/* CTA Section */}
+        <div className="text-center mt-12 py-6 bg-muted/20 rounded-xl border border-border/50">
+          <h2 className="text-xl font-bold text-foreground mb-2">
+            Behöver du mer detaljerade beräkningar?
+          </h2>
+          <p className="text-sm text-muted-foreground mb-4 max-w-lg mx-auto">
+            Utforska vår avancerade kalkylator för djupare analyser av lön, utdelning och kassaflöde.
+          </p>
+          <Link href="/freelance-wage-calculator">
+            <Button size="default" className="font-semibold">
+              Avancerad Kalkylator
+            </Button>
+          </Link>
+        </div>
         
         {/* Content Section */}
         <div className="mt-16">
@@ -147,22 +162,6 @@ export default function Home() {
               </Card>
             </Link>
           </div>
-        </div>
-
-        {/* CTA Section */}
-        <div className="text-center mt-16 py-12 bg-muted/20 rounded-2xl border border-border/50">
-          <h2 className="text-2xl font-bold text-foreground mb-4">
-            Behöver du mer detaljerade beräkningar?
-          </h2>
-          <p className="text-muted-foreground mb-6 max-w-xl mx-auto">
-            Utforska vår avancerade kalkylator för djupare analyser av lön, utdelning, 
-            kassaflöde och långsiktiga prognoser.
-          </p>
-          <Link href="/freelance-wage-calculator">
-            <Button size="lg" className="font-semibold">
-              Gå till Avancerad Kalkylator
-            </Button>
-          </Link>
         </div>
         
         <footer className="mt-16 py-8 text-center text-sm text-muted-foreground border-t border-border/50">
