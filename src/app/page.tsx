@@ -5,13 +5,54 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 
 export const metadata = {
-  title: "Frilanskalkylatorn",
-  description: "Fördjupad beräkning för frilansare.",
+  title: "Frilanskalkylatorn - Gratis timpris och lönekalkylator för svenska frilansare",
+  description: "Beräkna din optimala lön och utdelning som frilansare i Sverige. Gratis kalkylator som visar nettoinkomst, skatter och företagssparande baserat på aktuella svenska skatteregler 2024.",
+  keywords: "frilans kalkylator, timpris kalkylator, lön utdelning, svenska frilansare, skattekalkylator, egenanställning, aktiebolag ekonomi",
+  openGraph: {
+    title: "Frilanskalkylatorn - Beräkna lön och utdelning för svenska frilansare",
+    description: "Gratis kalkylator för svenska frilansare. Beräkna optimal lön, utdelning och skatter baserat på ditt timpris.",
+    type: "website",
+    locale: "sv_SE",
+  },
+  alternates: {
+    canonical: "https://your-domain.com", // Replace with your actual domain
+  },
 };
 
 export default function Home() {
+  const structuredData = {
+    "@context": "https://schema.org",
+    "@type": "WebApplication",
+    "name": "Frilanskalkylatorn",
+    "description": "Gratis kalkylator för svenska frilansare att beräkna optimal lön och utdelning",
+    "url": "https://your-domain.com", // Replace with your actual domain
+    "applicationCategory": "BusinessApplication",
+    "operatingSystem": "Web Browser",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "SEK"
+    },
+    "featureList": [
+      "Beräkning av nettolön",
+      "Utdelningsoptimering", 
+      "Skattekalkylering",
+      "Företagssparande analys"
+    ],
+    "audience": {
+      "@type": "Audience",
+      "audienceType": "Frilansare",
+      "geographicArea": "Sverige"
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-linear-to-br from-background via-background to-muted/20">
+    <>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+      <div className="min-h-screen bg-linear-to-br from-background via-background to-muted/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Hero Section */}
@@ -89,5 +130,6 @@ export default function Home() {
         </footer>
       </div>
     </div>
+    </>
   );
 }
