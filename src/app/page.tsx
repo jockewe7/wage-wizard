@@ -113,11 +113,11 @@ export default function Home() {
           <p className="text-sm text-muted-foreground mb-4 max-w-lg mx-auto">
             Utforska vår avancerade kalkylator för djupare analyser av lön, utdelning och kassaflöde.
           </p>
-          <Link href="/freelance-wage-calculator">
-            <Button size="default" className="font-semibold">
+          <Button asChild size="default" className="font-semibold">
+            <Link href="/freelance-wage-calculator">
               Avancerad Kalkylator
-            </Button>
-          </Link>
+            </Link>
+          </Button>
         </div>
         
         {/* Content Section */}
