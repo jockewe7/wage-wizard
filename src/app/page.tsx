@@ -22,7 +22,7 @@ export default function Home() {
             </div>
           </div>
           <h1 className="text-4xl lg:text-6xl font-bold text-foreground mb-4">
-            Sweden Wage Wizard
+            Frilanskalkylatorn
           </h1>
           <p className="text-xl text-muted-foreground mb-8 max-w-2xl mx-auto">
             Beräkna din optimala lön och utdelning som frilansare i Sverige. 
