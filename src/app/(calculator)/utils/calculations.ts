@@ -89,3 +89,64 @@ export const calculateFreelanceEarnings = (inputs: CalculationInputs): Calculati
     remainingCapital,
   };
 };
+
+// Reverse gross-from-net for Sweden (2025), tuned for Stockholm.
+// Simplified: municipal tax + burial fee + 20% state tax above threshold,
+// basic allowance as a flat approximation at high incomes,
+// job tax credit (jobbskatteavdrag) as a yearly lump-sum approximation.
+// For exact results, use Skatteverkets skattetabeller.
+
+type Options = {
+  municipalRate?: number;     // e.g. 0.3060 for Stockholm 2025
+  burialFeeRate?: number;     // 0.0007 in Stockholm 2025
+  churchFeeRate?: number;     // ~0.0103 if member in Stockholms domkyrkoförs. (set 0 if not)
+  stateTaxThreshold?: number; // 625800 for 2025 (after basic allowance)
+  basicAllowanceApprox?: number; // simple approx for high incomes, e.g. 15000
+  yearlyJobTaxCreditApprox?: number; // e.g. 30000–35000 kr/år around 80–90k/mån
+  maxIter?: number;
+  tol?: number;
+};
+
+export function grossFromNetMonthly(
+  targetNetMonthly: number,
+  opts: Options = {}
+): number {
+  const {
+    municipalRate = 0.3060,
+    burialFeeRate = 0.0007,
+    churchFeeRate = 0, // set to 0.0103 if you want to include kyrkoavgift
+    stateTaxThreshold = 615_800,
+    basicAllowanceApprox = 15_000,
+    yearlyJobTaxCreditApprox = 30_000, // try 30k–35k for 80–90k/mån brutto
+    maxIter = 200,
+    tol = 1e-2,
+  } = opts;
+
+  const totalLocalRate = municipalRate + burialFeeRate + churchFeeRate;
+
+  // Annualize for the math
+  const targetNetYearly = targetNetMonthly * 12;
+
+  // Tax model -> returns net yearly from gross yearly
+  const netFromGrossYearly = (grossY: number): number => {
+    const localTax = totalLocalRate * grossY;
+    const taxableForState = Math.max(0, (grossY - basicAllowanceApprox) - stateTaxThreshold);
+    const stateTax = 0.20 * taxableForState;
+    // Very simplified jobbskatteavdrag as a fixed credit:
+    const taxBeforeCredit = localTax + stateTax;
+    const taxAfterCredit = Math.max(0, taxBeforeCredit - yearlyJobTaxCreditApprox);
+    return grossY - taxAfterCredit;
+  };
+
+  // Binary search gross yearly
+  let lo = targetNetYearly;       // net ≤ gross
+  let hi = targetNetYearly * 2.0; // generous upper bound
+  for (let i = 0; i < maxIter; i++) {
+    const mid = 0.5 * (lo + hi);
+    const net = netFromGrossYearly(mid);
+    if (net < targetNetYearly) lo = mid; else hi = mid;
+    if (Math.abs(net - targetNetYearly) < tol) break;
+  }
+  return hi / 12; // back to monthly gross
+}
+

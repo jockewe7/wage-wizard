@@ -10,7 +10,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { HelpCircle, ArrowRight, Sparkles } from "lucide-react";
-import { calculateFreelanceEarnings } from "../utils/calculations";
+import { calculateFreelanceEarnings, grossFromNetMonthly } from "../utils/calculations";
 import { NumberInput } from "@/components/ui/number-input";
 import { CalculationResults } from "../types/calculation";
 import { formatCurrency } from "@/lib/utils";
@@ -129,13 +129,39 @@ export const SimpleCalculator = () => {
                       label='💰 Nettomånadsinkomst'
                       variant="primary"
                     />
+                    <div className="mt-3 pt-3 border-t border-primary/10">
+                      <p className="text-xs text-muted-foreground mb-1">Motsvarar bruttolön på</p>
+                      <p className="text-sm font-medium text-foreground">
+                        {formatCurrency(grossFromNetMonthly(((results.netSalary + results.netDividend)/12)))} SEK/mån
+                      </p>
+                    </div>
                   </div>
                   <div className="bg-muted/30 border border-border/50 rounded-xl p-6 text-center">
-                    <SummaryItem
-                      value={results.remainingCapital}
-                      label='🏦 Kvar i bolaget/år'
-                      variant="accent"
-                    />
+                    <TooltipProvider>
+                      <Tooltip>
+                        <TooltipTrigger asChild>
+                          <div className="cursor-help">
+                            <SummaryItem
+                              value={results.remainingCapital}
+                              label='🏦 Kvar i bolaget/år'
+                              variant="accent"
+                            />
+                          </div>
+                        </TooltipTrigger>
+                        <TooltipContent className="max-w-xs">
+                          <div className="space-y-2">
+                            <p className="font-medium">💼 Kapital som stannar i företaget</p>
+                            <p className="text-sm text-muted-foreground">
+                              Detta är pengarna som blir kvar i ditt AB efter lön, skatter och utdelning. 
+                              Kan användas för framtida investeringar, buffert eller högre utdelning nästa år.
+                            </p>
+                            <p className="text-xs text-muted-foreground italic">
+                              ✨ Tips: Bygg upp en kassareserv för säkrare ekonomi!
+                            </p>
+                          </div>
+                        </TooltipContent>
+                      </Tooltip>
+                    </TooltipProvider>
                   </div>
                   <div className="bg-destructive/5 border border-destructive/20 rounded-xl p-6 text-center">
                     <SummaryItem
