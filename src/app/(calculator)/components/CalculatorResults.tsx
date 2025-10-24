@@ -18,13 +18,14 @@ export const CalculatorResults = ({ results }: CalculatorResultsProps) => {
       <Card className='p-4 shadow-(--shadow-card)'>
         <h3 className='text-lg font-semibold mb-3 text-foreground'>Lön</h3>
         <div className='space-y-2'>
-          <ResultLabel value={results.netSalary} label="Årslön" />
+          <ResultLabel value={results.netSalary + results.incomeTax} label="Bruttolön" />
           <ResultDeduction value={results.employerContributions} label="Arbetsgivaravgifter" />
           <ResultDeduction value={results.incomeTax} label="Inkomstskatt" />
           <ResultTotal value={results.netSalary} label="Nettolön" />
         </div>
       </Card>
 
+      
       <Card className='p-4 shadow-(--shadow-card)'>
         <h3 className='text-lg font-semibold mb-3 text-foreground'>
           Tjänstepension

@@ -27,8 +27,6 @@ export const AdvancedCalculator = () => {
     setResults(newResults);
   };
 
-
-
   return (
     <div className='w-full max-w-6xl mx-auto space-y-4'>
       <AdvancedCalculatorInputs onResultsChange={handleResultsChange} />
