@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import { Card } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import {
   Tooltip,
@@ -14,7 +13,6 @@ import { calculateFreelanceEarnings, grossFromNetMonthly } from "../utils/calcul
 import { NumberInput } from "@/components/ui/number-input";
 import { CalculationResults } from "../types/calculation";
 import { formatCurrency } from "@/lib/utils";
-import { ResultLabel } from "./ResultLabel";
 import { SummaryItem } from "./SummaryItem";
 
 export const SimpleCalculator = () => {
@@ -105,7 +103,7 @@ export const SimpleCalculator = () => {
           </div>
 
           <div className='w-full'>
-            {results.grossIncome === 0 ? (
+            {results.grossIncome < 600 ? (
               <div className="text-center py-12">
                 <div className="p-4 bg-muted/20 rounded-full inline-flex mb-4">
                   <HelpCircle className="h-8 w-8 text-muted-foreground" />
@@ -132,7 +130,7 @@ export const SimpleCalculator = () => {
                     <div className="mt-3 pt-3 border-t border-primary/10">
                       <p className="text-xs text-muted-foreground mb-1">Motsvarar bruttolön på</p>
                       <p className="text-sm font-medium text-foreground">
-                        {formatCurrency(grossFromNetMonthly(((results.netSalary + results.netDividend)/12)))} SEK/mån
+                        {formatCurrency(grossFromNetMonthly(((results.netSalary + results.netDividend)/12)))}
                       </p>
                     </div>
                   </div>

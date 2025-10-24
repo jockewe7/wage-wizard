@@ -55,7 +55,7 @@ export const calculateFreelanceEarnings = (inputs: CalculationInputs): Calculati
 
   // Calculate available for dividends
   const profitAfterSalary =
-    grossIncome - totalSalaryCost - annualTotalPensionCost;
+    grossIncome - totalSalaryCost - annualTotalPensionCost - otherExpenses;
 
   // Corporate tax (20.6%)
   const corporateTax = Math.max(0.206 * profitAfterSalary, 0);
@@ -70,7 +70,7 @@ export const calculateFreelanceEarnings = (inputs: CalculationInputs): Calculati
   const netDividend = dividendAmount - dividendTax;
 
   // Remaining capital in company (after other expenses)
-  const remainingCapital = profitAfterTaxes - dividendAmount - otherExpenses;
+  const remainingCapital = profitAfterTaxes - dividendAmount;
 
   return {
     grossIncome,
