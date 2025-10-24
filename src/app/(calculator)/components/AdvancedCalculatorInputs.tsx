@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Card } from "@/components/ui/card";
 import { NumberInput } from "@/components/ui/number-input";
 import { Label } from "@/components/ui/label";
@@ -12,7 +12,7 @@ interface CalculatorSettingsProps {
   onResultsChange: (results: CalculationResults) => void;
 }
 
-const ibb = 76_200.0; // Inkomstbasbelopp for 2024
+// const ibb = 76_200.0; // Inkomstbasbelopp for 2024
 const stateTaxThreshold = 615000.0; // Approx threshold for state tax in 2024
 
 export const AdvancedCalculatorInputs = ({
@@ -27,18 +27,7 @@ export const AdvancedCalculatorInputs = ({
   const [desiredPension, setDesiredPension] = useState<string>("7000");
   const [otherExpenses, setOtherExpenses] = useState<string>("20000");
 
-  useEffect(() => {
-    calculateEarnings();
-  }, [
-    hourlyRate,
-    vacationDays,
-    desiredSalary,
-    billableHours,
-    desiredPension,
-    otherExpenses,
-  ]);
-
-  const calculateEarnings = () => {
+  const calculateEarnings = useCallback(() => {
     const inputs = {
       hourlyRate: Number(hourlyRate) || 0,
       vacationDays: Number(vacationDays) || 0,
@@ -50,7 +39,20 @@ export const AdvancedCalculatorInputs = ({
 
     const results = calculateFreelanceEarnings(inputs);
     onResultsChange(results);
-  };
+  }, [
+    hourlyRate,
+    vacationDays,
+    desiredSalary,
+    billableHours,
+    desiredPension,
+    otherExpenses,
+    onResultsChange
+  ]);
+
+  useEffect(() => {
+    calculateEarnings();
+  }, [calculateEarnings]);
+
   return (
     <Card className='p-4 md:p-6 shadow-(--shadow-card)'>
       <h2 className='text-xl font-bold text-foreground mb-4'>Inställningar</h2>

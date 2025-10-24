@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { Card } from "@/components/ui/card";
 import { Label } from "@/components/ui/label";
 import {
@@ -38,23 +38,6 @@ export const SimpleCalculator = () => {
     netDividend: 0,
     remainingCapital: 0,
   });
-
-  useEffect(() => {
-    calculateEarnings();
-  }, [hourlyRate]);
-
-  const calculateEarnings = () => {
-    const inputs = {
-      hourlyRate: Number(hourlyRate) || 0,
-      vacationDays: Number(vacationDays) || 0,
-      desiredSalary: Number(monthlySalary) || 0,
-      billableHours: Number(billableHours) || 0,
-      desiredPension: Number(pension) || 0,
-      otherExpenses: Number(otherExpensesPerYear) || 0,
-    };
-
-    const results = calculateFreelanceEarnings(inputs);
-  };
 
   const results = calculateFreelanceEarnings({
     hourlyRate: hourlyRate ? Number(hourlyRate) : 0,

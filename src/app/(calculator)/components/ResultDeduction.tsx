@@ -8,7 +8,7 @@ export interface ResultDeductionProps {
 }
 
 const ResultDeduction = React.forwardRef<HTMLDivElement, ResultDeductionProps>(
-  ({ className, value, label, ...props }) => {
+  ({ value, label, ...props }) => {
     return (
       <div className='flex justify-between items-center' {...props}>
         <span className='text-muted-foreground'>{label}</span>

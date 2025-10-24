@@ -1,6 +1,5 @@
 import * as React from "react";
-import { Input } from "@/components/ui/input";
-import { cn, formatCurrency } from "@/lib/utils";
+import { formatCurrency } from "@/lib/utils";
 
 export interface ResultLabelProps
   extends Omit<React.InputHTMLAttributes<HTMLInputElement>, "type"> {
@@ -10,7 +9,7 @@ export interface ResultLabelProps
 }
 
 const ResultLabel = React.forwardRef<HTMLInputElement, ResultLabelProps>(
-  ({ className, ...props }) => {
+  ({ ...props }) => {
     return (
       <div className='flex justify-between items-center'>
         <span className='text-muted-foreground'>{props.label}</span>

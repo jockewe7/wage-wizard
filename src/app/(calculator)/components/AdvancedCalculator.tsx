@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import { AdvancedCalculatorInputs } from "./AdvancedCalculatorInputs";
 import { CalculatorResults } from "./CalculatorResults";
 import { CashAccumulationChart } from "./CashAccumulationChart";
@@ -23,9 +23,9 @@ export const AdvancedCalculator = () => {
     remainingCapital: 0,
   });
 
-  const handleResultsChange = (newResults: CalculationResults) => {
+  const handleResultsChange = useCallback((newResults: CalculationResults) => {
     setResults(newResults);
-  };
+  }, []);
 
   return (
     <div className='w-full max-w-6xl mx-auto space-y-4'>

@@ -84,6 +84,7 @@ export function getPostBySlug(slug: string, type: 'blog' | 'guides' = 'blog'): P
       readingTime: readTime,
     }
   } catch (error) {
+    console.error(`Error fetching post with slug "${slug}":`, error)
     return null
   }
 }
