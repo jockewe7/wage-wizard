@@ -1,0 +1,30 @@
+<svg width="180" height="180" viewBox="0 0 180 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Blue background -->
+  <rect width="180" height="180" rx="32" fill="#007AFF"/>
+  
+  <!-- Calculator body -->
+  <rect x="30" y="30" width="120" height="120" rx="12" fill="white"/>
+  
+  <!-- Calculator screen -->
+  <rect x="40" y="40" width="100" height="25" rx="6" fill="#007AFF"/>
+  
+  <!-- Calculator buttons grid -->
+  <rect x="40" y="75" width="20" height="20" rx="4" fill="#E5E7EB"/>
+  <rect x="70" y="75" width="20" height="20" rx="4" fill="#E5E7EB"/>
+  <rect x="100" y="75" width="20" height="20" rx="4" fill="#FFD700"/>
+  <rect x="130" y="75" width="20" height="20" rx="4" fill="#FF6B6B"/>
+  
+  <rect x="40" y="105" width="20" height="20" rx="4" fill="#E5E7EB"/>
+  <rect x="70" y="105" width="20" height="20" rx="4" fill="#E5E7EB"/>
+  <rect x="100" y="105" width="20" height="20" rx="4" fill="#FFD700"/>
+  <rect x="130" y="105" width="20" height="50" rx="4" fill="#10B981"/>
+  
+  <rect x="40" y="135" width="50" height="20" rx="4" fill="#4F46E5"/>
+  <rect x="100" y="135" width="20" height="20" rx="4" fill="#FFD700"/>
+  
+  <!-- Swedish crown -->
+  <path d="M135 15L145 5L155 15L165 5V25L155 15L145 25L135 15V25Z" fill="#FFD700"/>
+  
+  <!-- SEK currency symbol -->
+  <text x="50" y="55" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white">SEK</text>
+</svg>

@@ -78,6 +78,15 @@ export const metadata: Metadata = {
     // google: 'your-google-verification-code',
     // bing: 'your-bing-verification-code',
   },
+  icons: {
+    icon: [
+      { url: '/favicon.ico', sizes: '32x32', type: 'image/x-icon' },
+      { url: '/favicon.svg', type: 'image/svg+xml' },
+    ],
+    apple: [
+      { url: '/apple-touch-icon.svg', sizes: '180x180', type: 'image/svg+xml' },
+    ],
+  },
 };
 
 export default function RootLayout({
