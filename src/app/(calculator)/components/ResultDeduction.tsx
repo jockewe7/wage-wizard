@@ -8,9 +8,9 @@ export interface ResultDeductionProps {
 }
 
 const ResultDeduction = React.forwardRef<HTMLDivElement, ResultDeductionProps>(
-  ({ value, label, ...props }) => {
+  ({ value, label, ...props }, ref) => {
     return (
-      <div className='flex justify-between items-center' {...props}>
+      <div ref={ref} className='flex justify-between items-center' {...props}>
         <span className='text-muted-foreground'>{label}</span>
         <span className='font-medium text-destructive'>
           -{formatCurrency(value)}

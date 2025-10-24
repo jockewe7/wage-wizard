@@ -11,7 +11,7 @@ export interface SummaryItemProps {
 }
 
 const SummaryItem = React.forwardRef<HTMLDivElement, SummaryItemProps>(
-  ({ className, value, label, variant = "default", isNegative = false, ...props }) => {
+  ({ className, value, label, variant = "default", isNegative = false, ...props }, ref) => {
     const getVariantStyles = () => {
       switch (variant) {
         case "primary":
@@ -26,7 +26,7 @@ const SummaryItem = React.forwardRef<HTMLDivElement, SummaryItemProps>(
     };
 
     return (
-      <div className={cn('flex flex-col', className)} {...props}>
+      <div ref={ref} className={cn('flex flex-col', className)} {...props}>
         <span className='text-sm text-muted-foreground'>{label}</span>
         <span className={cn('font-semibold', getVariantStyles())}>
           {isNegative ? '-' : ''}{formatCurrency(value)}

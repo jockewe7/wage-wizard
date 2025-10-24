@@ -10,7 +10,7 @@ export interface ResultTotalProps {
 }
 
 const ResultTotal = React.forwardRef<HTMLDivElement, ResultTotalProps>(
-  ({ className, value, label, variant = "primary", ...props }) => {
+  ({ className, value, label, variant = "primary", ...props }, ref) => {
     return (
       <div className={cn('flex justify-between items-center pt-3 border-t border-border', className)} {...props}>
         <span className='text-muted-foreground'>{label}</span>

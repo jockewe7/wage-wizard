@@ -9,9 +9,9 @@ export interface ResultLabelProps
 }
 
 const ResultLabel = React.forwardRef<HTMLInputElement, ResultLabelProps>(
-  ({ ...props }) => {
+  ({ ...props }, ref) => {
     return (
-      <div className='flex justify-between items-center'>
+      <div ref={ref} className='flex justify-between items-center'>
         <span className='text-muted-foreground'>{props.label}</span>
         <span className='font-medium text-foreground'>
           {formatCurrency(props.value)}
