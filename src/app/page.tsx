@@ -1,8 +1,9 @@
 
 import { SimpleCalculator } from "./(calculator)/components/SimpleCalculator";
-import { Calculator, TrendingUp, PiggyBank } from "lucide-react";
+import { Calculator, TrendingUp, PiggyBank, BookOpen, FileText } from "lucide-react";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { Card } from "@/components/ui/card";
 
 export const metadata = {
   title: "Frilanskalkylatorn - Gratis timpris och lönekalkylator för svenska frilansare",
@@ -104,6 +105,50 @@ export default function Home() {
         
         <SimpleCalculator />
         
+        {/* Content Section */}
+        <div className="mt-16">
+          <div className="text-center mb-8">
+            <h2 className="text-3xl font-bold text-foreground mb-4">
+              Lär dig mer om svenskt frilansande
+            </h2>
+            <p className="text-muted-foreground max-w-xl mx-auto">
+              Fördjupa dig i skatteregler, optimeringsstrategier och praktiska tips för att maximera din lönsamhet.
+            </p>
+          </div>
+          
+          <div className="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto mb-12">
+            <Link href="/blog">
+              <Card className="p-6 hover:shadow-lg transition-shadow h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-primary/10 rounded-full">
+                    <FileText className="h-6 w-6 text-primary" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground">Artiklar & Skatteregler</h3>
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  Läs våra djupgående artiklar om 3:12-regler, skattetabeller och optimeringsstrategier för svenska frilansare.
+                </p>
+                <span className="text-primary font-medium">Läs artiklar →</span>
+              </Card>
+            </Link>
+            
+            <Link href="/guides">
+              <Card className="p-6 hover:shadow-lg transition-shadow h-full">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="p-3 bg-accent/10 rounded-full">
+                    <BookOpen className="h-6 w-6 text-accent-foreground" />
+                  </div>
+                  <h3 className="text-xl font-semibold text-foreground">Praktiska Guider</h3>
+                </div>
+                <p className="text-muted-foreground mb-4">
+                  Steg-för-steg guider som hjälper dig optimera lön och utdelning, förstå reglerna och maximera din ekonomi.
+                </p>
+                <span className="text-accent-foreground font-medium">Utforska guider →</span>
+              </Card>
+            </Link>
+          </div>
+        </div>
+
         {/* CTA Section */}
         <div className="text-center mt-16 py-12 bg-muted/20 rounded-2xl border border-border/50">
           <h2 className="text-2xl font-bold text-foreground mb-4">
