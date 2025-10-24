@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 
 const NAV = [
   { href: "/", label: "Hem" },
-  { href: "/freelance-wage-calculator", label: "Kalkylator" },
+  { href: "/avancerad-kalkylator", label: "Kalkylator" },
   { href: "/blogg", label: "Blogg" },
   { href: "/om", label: "Om" },
 ];
