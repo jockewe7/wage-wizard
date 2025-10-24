@@ -8,8 +8,8 @@ import { useEffect, useState } from "react"
 const NAV = [
   { href: "/", label: "Hem" },
   { href: "/avancerad-kalkylator", label: "Kalkylator" },
-  { href: "/blogg", label: "Blogg" },
-  { href: "/om", label: "Om" },
+  { href: "/blog", label: "Artiklar" },
+  { href: "/guides", label: "Guider" },
 ];
 
 function NavLink({ href, label }: { href: string; label: string }) {
